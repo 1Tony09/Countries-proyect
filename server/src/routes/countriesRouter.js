@@ -1,10 +1,9 @@
 const { Router } = require("express");
 const countriesRouter = Router();
 
-const {} = require("../handlers/countriesHandler");
+const { getCountriesId, getCountriesName } = require("../handlers/countriesHandler");
 
-countriesRouter.get("/", );
-countriesRouter.get("/", );
-countriesRouter.get("/", );
+countriesRouter.get("/", getCountriesName);
+countriesRouter.get("/:idPais", getCountriesId);
 
 module.exports = countriesRouter;

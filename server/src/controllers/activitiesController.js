@@ -14,7 +14,7 @@ const createActivity = async (name, difficulty, duration, season, country) => {
     
         return newActivity;
     } catch (error) {
-        return error
+        return error;
     }
 
 
