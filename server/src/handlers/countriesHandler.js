@@ -48,8 +48,8 @@ const getCountriesName = async (req, res) => {
 
 const getCountriesId = async (req,res) => {
     try {
-        const { idPais } = req.params;
-        const countryId = await countryById(idPais);
+        const { id } = req.params;
+        const countryId = await countryById(id);
 
         if(!countryId) {
             return res.status(404).send("ID not found");

@@ -1,17 +1,6 @@
 const { Country, Activity, Op } = require("../db");
 const axios = require("axios");
 
-const getCountriesDb = async () => {
-    try {
-        const countriesDb = await Country.findAll({
-            include: { model: Activity },
-        });
-        return countriesDb;
-    } catch (error) {
-        return error;
-    }
-};
-
 const countriesData = async() => {
     try {
         const countries = await getCountriesDb();
@@ -37,6 +26,18 @@ const countriesData = async() => {
         return error;
     }
 };
+
+const getCountriesDb = async () => {
+    try {
+        const countriesDb = await Country.findAll({
+            include: { model: Activity },
+        });
+        return countriesDb;
+    } catch (error) {
+        return error;
+    }
+};
+
 
 const countryById = async(id) => {
     try {

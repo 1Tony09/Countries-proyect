@@ -3,7 +3,7 @@ const countriesRouter = Router();
 
 const { getCountriesId, getCountriesName } = require("../handlers/countriesHandler");
 
+countriesRouter.get("/:id", getCountriesId);
 countriesRouter.get("/", getCountriesName);
-countriesRouter.get("/:idPais", getCountriesId);
 
 module.exports = countriesRouter;
