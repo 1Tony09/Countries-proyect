@@ -91,6 +91,10 @@ function rootReducer (state = initialState, action) {
                 countries: countriesByActivity,
             };
         }
+
+        default:
+            return { ...state };
+            
         }
 }
 

@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { NavLink } from 'react-router-dom'
+// eslint-disable-next-line no-unused-vars
+import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import style from './Form.module.css'
-import {postActivity, getActivities} from '../../Redux/Actions/actions'
+import {postActivity, getActivities, } from '../../Redux/Actions/actions'
 
 
-export function validate(input) {
+const validate = (input) => {
     let errors = {};
     if(!input.name) {
         errors.name = 'Name is required';
@@ -35,7 +35,15 @@ export function validate(input) {
 
 
 export default function Form() {
+
+    const allCountries = useSelector(state => state.countriesBackUp)
+
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getActivities())
+    }, [])
+
     const [state, setState] = useState({
         name: '',
         difficulty: '',
@@ -65,16 +73,128 @@ export default function Form() {
         })
     };
 
-    const buttonDisabled = Object.entries(error).length ? true : false;
+    const handleInputChange = (e) => {
+        if(e.target.name === 'countries') {
+            if(state.countries.includes(e.target.value)) return
+            setState({
+                ...state,
+                [e.target.name]: [...state[e.target.name], e.target.value]
+            })
+        } else {
+            setState({
+                ...state,
+                [e.target.name]: e.target.value
+            })
+        }
+
+        validate({
+            ...state,
+            [e.target.name]: e.target.value
+        }, e.target.name)
+    };
+
+    const handleDelete = (e) => {
+        setState({
+            ...state,
+            [e.target.name]: [...state[e.target.name].filter(c => c !== e.target.id)]
+        })
+    }
+
+    const disableFunction = ()=>{
+        let disabledAux = true;
+        for(let e in error){
+            if(error[e] === '') disabledAux = false;
+            else {
+                disabledAux = true;
+                break;
+            }
+        }
+        return disabledAux;
+    }
     
     return (
         <div className={style.formContainer}>
-            <form action='' className={style.form}>
-                <label>Name: </label>
-                <label></label>
-                <label></label>
-                <label></label>
-                <label></label>
+            <form onSubmit={handleSubmit} className={style.form}>
+                <input 
+                    type='text'
+                    name='name'
+                    id='name'
+                    className={style.name}
+                    value={state.name}
+                    onChange={handleInputChange}
+                    placeholder='Insert name...'
+                />
+                {error.name ? (
+                    <small className={style.error}>{error.name}</small>
+                ) : null}
+
+                <input 
+                    type='number'
+                    name='difficulty'
+                    id='difficulty'
+                    className={style.difficulty}
+                    value={state.difficulty}
+                    onChange={handleInputChange}
+                    placeholder='Insert difficulty...'
+                    min={0}
+                />
+                {error.difficulty ? (
+                    <small className={style.error}>{error.difficulty}</small>
+                ) : null}
+
+                <input 
+                    type='number'
+                    name='duration'
+                    id='duration'
+                    className={style.duration}
+                    value={state.duration}
+                    onChange={handleInputChange}
+                    placeholder='Insert time of duration...'
+                    min={0}
+                />
+                {error.duration ? (
+                    <small className={style.error}>{error.duration}</small>
+                ) : null}
+
+                <select
+                    type='text'
+                    name='season'
+                    id='season'
+                    className={style.seasonSelect}
+                    onChange={handleInputChange}
+                >
+                    <option> Select season </option>
+                    <option value='Summer'>Summer</option>
+                    <option value='Autumn'>Autumn</option>
+                    <option value='Winter'>Winter</option>
+                    <option value='Spring'>Spring</option>
+                </select>
+                {error.season ? (
+                    <small className={style.error}>{error.season}</small>
+                ) : null}
+
+                <select
+                    name='countries'
+                    id='countries'
+                    className={style.countriesSelect}
+                    onChange={handleInputChange}
+                >
+                    <option> Select countries </option>
+                    {allCountries?.map((c) => <option value={c} key={c}>{c}</option>)}
+                </select>
+                {error.countries ? (
+                    <small className={style.error}>{error.countries}</small>
+                ) : null}
+                <div>
+                    {state.countries.map((c) => (
+                        <div className={style.X} key={c}>
+                            <label>{c}</label>
+                            <button name="countries" id={c} onClick={handleDelete}>X</button>
+                        </div>
+                    ))}
+                </div>
+
+                <input type='submit' disabled={disableFunction()} />
             </form>
         </div>
     )
@@ -97,11 +217,7 @@ Renderizado: En la sección de renderizado, se crea un formulario con varios cam
 */
 
 // OTRO METODO DE HACER EL DISABLED
-// let disabled = false;
-// for (let key in error) {
-//     disabled = true;
-//     break;
-// }
+// const buttonDisabled = Object.entries(error).length ? true : false;
 
 // EL OBJECT.ENTRIES convierte lo que le pasa por error a un ARRAY DE ARRAYS, al transformarlo uso .length para ver si existe algo en ese ARRAY DE ARRAYS, si existe algo es que quiere decir que hay un error y se establece en true, si no hay nada es false.
 

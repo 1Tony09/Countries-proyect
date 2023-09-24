@@ -1,0 +1,11 @@
+.error {
+    font-size: 0.75rem;
+    color: #c53030;
+    text-align: left;
+}
+
+@media (min-width: 768px) {
+    .error {
+        font-size: 1rem;
+    }
+}
