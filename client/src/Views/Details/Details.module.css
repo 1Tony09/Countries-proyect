@@ -1,0 +1,157 @@
+.container {
+    position: fixed;
+    z-index: 300;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    font-family: 'Noah', sans-serif;
+    overflow-y: auto;
+  }
+  
+  .modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-height: 100vh;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+    text-align: center;
+  }
+  
+  .background {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transition-property: opacity;
+  }
+  
+  .overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: black;
+    opacity: 0.5;
+  }
+  
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    border-radius: 0.5rem;
+    text-align: left;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    transform: var(--tw-transform);
+    transition-property: all;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    height: 50%;
+    background-color: white;
+    border-bottom-right-radius: 3rem;
+    border-bottom-left-radius: 3rem;
+    overflow-y: auto;
+  }
+
+  .spanStyle {
+    display: none;
+    display: inline-block;
+    vertical-align: middle;
+    height: 100vh;
+  }
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+  }
+  
+  .closeButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .countryName {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #495057;
+  }
+  
+  .details {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+  }
+  
+  .imageContainer {
+    width: 50%;
+  }
+  
+  .flagImage {
+    width: 100%;
+    height: auto;
+  }
+  
+  .info {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  
+  .activitiesHeader {
+    padding: 1rem;
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #495057;
+  }
+  
+  .activitiesList {
+    padding: 1rem;
+  }
+  
+  .activityTable {
+    width: 100%;
+    margin-bottom: 1rem;
+    border-collapse: collapse;
+  }
+  
+  .activityTable td {
+    padding: .75rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+  }
+  
+  .noActivitiesMessage {
+    padding: 1rem;
+    color: #6c757d;
+  }
+  
+  .createButton {
+    display: inline-block;
+    font-weight: 400;
+    color: #212529;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    color: #007bff;
+    background-color: transparent;
+    background-image: none;
+    border-color: #007bff;
+  }
+  

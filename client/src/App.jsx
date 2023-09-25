@@ -1,10 +1,10 @@
 import './App.css';
-import {Route, BrowserRouter, Switch} from "react-router-dom";
+import { Route } from "react-router-dom";
 import Home from './Views/Home/Home';
-import Landing from './Views/Landing/Landing';
 import Form from './Views/Form/Form';
-import Details from './Views/Details/Details';
-import Navbar from './Components/Navbar/Navbar';
+import LandingPage from './Views/Landing/Landing';
+import NavBar from './Components/Navbar/Navbar';
+import Pagination from './Components/Pagination/Pagination';
 
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -44,17 +44,23 @@ function App() {
 
   return (
     <div className='App'>
-      <BrowserRouter>
-              <Route path={"*"} component={Navbar}/>
-          <Switch>
-              <Route exact path={"/"} component={Landing} />
-              <Route path={"/home"} component={Home} />
-              <Route path={"/form"} component={Form} />
-              <Route path={"/details/:id"} component={Details} />
-          </Switch>
-      </BrowserRouter>
+      <Route exact path={'/'} component={LandingPage} />
+      <Route path={'/home'} >
+        <NavBar data={data} setCurrentPage={setCurrentPage} />
+        <Home data={currentCountries} />
+        <Pagination 
+          totalPages={totalPages}
+          paginate={paginate}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
+      </Route>
+      <Route path={'/form'}>
+        <Form data={data} />
+      </Route>
     </div>
   );
 }
+
 
 export default App;
