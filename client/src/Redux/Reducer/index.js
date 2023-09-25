@@ -1,4 +1,4 @@
-import { GET_ACTIVITIES, GET_COUNTRIES, GET_COUNTRIES_BY_ID, GET_COUNTRIES_BY_NAME, ORDER_COUNTRIES, FILTER_COUNTRIES_BY_ACTIVITY, FILTER_COUNTRIES_BY_CONTINENT } from "../Actions/action-types";
+import { GET_ACTIVITIES, GET_COUNTRIES, GET_COUNTRIES_BY_ID, GET_COUNTRIES_BY_NAME, ORDER_COUNTRIES, FILTER_COUNTRIES_BY_ACTIVITY, FILTER_COUNTRIES_BY_CONTINENT, CLEANER, CLEAN_ERROR, } from "../Actions/action-types";
 
 const initialState = {
     countries: [],
@@ -91,6 +91,17 @@ function rootReducer (state = initialState, action) {
                 countries: countriesByActivity,
             };
         }
+
+        case CLEANER:
+            return {
+                ...state,
+                countries: [...state.countriesBackUp],
+                countryDetail: {},
+                error: '',
+            }
+
+        case CLEAN_ERROR:
+            return { ...state, error: '' }
 
         default:
             return { ...state };

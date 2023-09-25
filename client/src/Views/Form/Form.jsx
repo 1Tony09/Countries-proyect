@@ -5,7 +5,7 @@ import style from './Form.module.css'
 import {postActivity, getActivities, } from '../../Redux/Actions/actions'
 
 
-const validate = (input) => {
+export function validate(input) {
     let errors = {};
     if(!input.name) {
         errors.name = 'Name is required';
@@ -42,7 +42,7 @@ export default function Form() {
 
     useEffect(() => {
         dispatch(getActivities())
-    }, [])
+    },[])
 
     const [state, setState] = useState({
         name: '',

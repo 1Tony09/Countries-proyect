@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_COUNTRIES,GET_ACTIVITIES,GET_COUNTRIES_BY_ID,GET_COUNTRIES_BY_NAME,ORDER_COUNTRIES,FILTER_COUNTRIES_BY_ACTIVITY,FILTER_COUNTRIES_BY_CONTINENT, } from "../Actions/action-types";
+import { GET_COUNTRIES,GET_ACTIVITIES,GET_COUNTRIES_BY_ID,GET_COUNTRIES_BY_NAME,ORDER_COUNTRIES,FILTER_COUNTRIES_BY_ACTIVITY,FILTER_COUNTRIES_BY_CONTINENT, CLEANER, CLEAN_ERROR, } from "../Actions/action-types";
 
 export function postActivity(state) {
     return async function() {
@@ -89,4 +89,12 @@ export function filterCountriesByActivity(filter) {
         type: FILTER_COUNTRIES_BY_ACTIVITY,
         payload: filter,
     }
+}
+
+export function cleaner() {
+    return { type: CLEANER }
+}
+
+export function cleanError() {
+    return { type: CLEAN_ERROR }
 }
